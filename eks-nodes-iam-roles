@@ -81,3 +81,14 @@ resource "aws_security_group_rule" "eks-rails-node-ingress-cluster" {
   to_port                  = 65535
   type                     = "ingress"
 }
+
+# Open ports for pods to communicate with api server (from pods to api)
+resource "aws_security_group_rule" "eks-rails-cluster-ingress-node-https" {
+  description              = "Allow pods to communicate with the cluster API Server"
+  from_port                = 443
+  protocol                 = "tcp"
+  security_group_id        = "${aws_security_group.eks-rails-cluster.id}"
+  source_security_group_id = "${aws_security_group.eks-rails-node-sg.id}"
+  to_port                  = 443
+  type                     = "ingress"
+}
