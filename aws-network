@@ -8,7 +8,7 @@ resource "aws_vpc" "eks-rail-vpc" {
 
   tags = "${
     map(
-     "Name", "eks-rail",
+     "Name", "eks-rail-vpc",
      "kubernetes.io/cluster/${var.cluster-name}", "shared",
     )
   }"
@@ -24,7 +24,7 @@ resource "aws_subnet" "eks-rail-subnet" {
 
   tags = "${
     map(
-     "Name", "eks-rail-node",
+     "Name", "eks-rail-node-subnet",
      "kubernetes.io/cluster/${var.cluster-name}", "shared",
     )
   }"
