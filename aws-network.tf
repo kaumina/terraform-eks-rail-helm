@@ -1,7 +1,9 @@
 # This data source is included for ease of sample architecture deployment
 # and can be swapped out as necessary.
 data "aws_availability_zones" "available" {}
-
+provider "aws" {
+  region     = "us-east-1"
+}
 # Create VPC
 resource "aws_vpc" "eks-rail-vpc" {
   cidr_block = "10.0.0.0/16"
