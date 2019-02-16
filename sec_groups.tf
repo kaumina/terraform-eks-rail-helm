@@ -1,3 +1,23 @@
+# Create the security group for EKS masters
+
+resource "aws_security_group" "eks-rails-cluster" {
+  name        = "eks-demo-rail-cluster"
+  description = "Cluster communication with worker nodes"
+  vpc_id      = "${aws_vpc.eks-rail-vpc.id}"
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "eks-rail-sg"
+  }
+}
+
+
 # Setting up security groups for EKS nodes
 resource "aws_security_group" "eks-rails-node-sg" {
   name        = "eks-rails-node-sg"
