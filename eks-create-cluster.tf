@@ -1,4 +1,4 @@
-# Creating EKS cluster
+# Create EKS cluster
 resource "aws_eks_cluster" "eks-rail" {
   name            = "${var.cluster-name}"
   role_arn        = "${aws_iam_role.eks-rail-cluster.arn}"
