@@ -1,5 +1,7 @@
-# This data source is included for ease of sample architecture deployment
-# and can be swapped out as necessary.
+#######################################################################################
+#        This tf will create AWS networking components:VPC, Subnets, IG and routes
+########################################################################################
+
 data "aws_availability_zones" "available" {}
 provider "aws" {
   region     = "us-east-1"
