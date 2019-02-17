@@ -93,9 +93,9 @@ Here, I have used local tfstate as the backend due to demonstration.
     or below to remove the deployment completly. This will delete the Helm Provisioned AWS resources completely.
     
     ```
-    helm install --name redmine stable/redmine
+     helm del --purge redmine
     ```
-14. Dispose the EKS cluster.
+14. Dispose the EKS cluster with below. Make sure to delete redmine (helm del --purge redmine) fully otherwise Terrafom struggles to destroy the stack due to the dependent AWS resources created by Helm.
     ```
     terraform destroy --auto-approve
     ```
