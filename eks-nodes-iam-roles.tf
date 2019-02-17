@@ -1,3 +1,9 @@
+#######################################################################################
+#             This assigns node policies to node IAM role.
+# Note: AmazonEC2ContainerRegistryReadOnly will not be used to since we don't use ECS.
+########################################################################################
+
+
 # Create iam roles for eks nodes
 resource "aws_iam_role" "eks-rails-node-role" {
   name = "eks-rails-node-role"
