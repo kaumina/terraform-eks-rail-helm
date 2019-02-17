@@ -1,4 +1,6 @@
-# Redmine with MySql deployed in EKS cluster using Terrafom/Helm
+# Deploy Redmine/MariaDB EKS cluster using Terraform and Helm
+## Introduction
+This demonstration uses Terraform, EKS, Helm and you need to setup below tools and binaries in your running server.
 ## Pre-requisites
 Initially you have to setup your local server(deployment box). This can be your desktop or and EC2.
 
@@ -10,14 +12,13 @@ Initially you have to setup your local server(deployment box). This can be your 
 * Install Terraform.(https://learn.hashicorp.com/terraform/getting-started/install.html)
 
 ## Procedure
-Clone this repository. 
 Here, I have used local tfstate as the backend due to demonstration.
 
-1. Configure aws cli with your AWS Access Key ID and AWS Secret Access Key. This is to avoid store your credentials in terraform files.
+1. Configure aws cli with your AWS Access Key ID and AWS Secret Access Key. This is to avoid store your credentials in Terraform files.
    ```
    aws configure     
    ```
-2. Clone the reposroty.
+2. Clone the repository.
    ```
    git clone https://github.com/codefreaker/terraform-eks-rail-helm.git
    ```
@@ -25,12 +26,12 @@ Here, I have used local tfstate as the backend due to demonstration.
    ```
    cd terraform-eks-rail-helm
    ```
-4. Run below terraform commands.
+4. Run below Terraform commands.
    ``` 
    terraform init
    terraform plan 
    ```
-5. If plan ran sucessfully, now you may apply the changes.(remove --auto--approve if you want)
+5. If plan ran successfully, now you may apply the changes.(remove --auto--approve if you want)
    ```
    terraform apply --auto--approve
    ```
@@ -48,7 +49,7 @@ Here, I have used local tfstate as the backend due to demonstration.
    ip-10-0-1-234.ec2.internal   Ready    <none>   7m    v1.11.5
    ```
       
-8. Run start and initiate tiller now.
+8. Run start and initiate Tiller now.
    ```
    helm init
    ```
@@ -76,18 +77,14 @@ Here, I have used local tfstate as the backend due to demonstration.
     redmine-redmine-65c84c84b7-b42mf   1/1     Running   0          10m   10.0.0.37    ip-10-0-0-8.ec2.internal     <none>
     ```  
 12. Run below script to get the Redmine cluster and login info.
-	 ```
-	 chmod +x redmine-info.sh;./redmine-info.sh
+    ```
+    chmod +x redmine-info.sh;./redmine-info.sh
     ```
 13. To uninstall/delete Redmine.
     ```
-	 helm delete redmine
+    helm delete redmine
     ```
 14. Dispose the EKS cluster.
     ```
     terraform destroy --auto-approve
     ```
-   
-
-
-
