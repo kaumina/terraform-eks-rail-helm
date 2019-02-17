@@ -5,7 +5,7 @@
 # Create the security group for EKS masters
 
 resource "aws_security_group" "eks-rails-cluster" {
-  name        = "eks-demo-rail-cluster"
+  name        = "eks-rail-cluster-sg"
   description = "Cluster communication with worker nodes"
   vpc_id      = "${aws_vpc.eks-rail-vpc.id}"
 
