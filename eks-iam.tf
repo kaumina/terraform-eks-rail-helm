@@ -1,4 +1,8 @@
-# Create and attach policies to assum role which used by EKS service to access other AWS services.
+#######################################################################################
+#             Attaching policies to assume role in EKS cluster
+########################################################################################
+
+# Create and attach policies to assume role which used by EKS service to access other AWS services.
 
 resource "aws_iam_role" "eks-rail-cluster" {
   name = "eks-rail-cluster"
