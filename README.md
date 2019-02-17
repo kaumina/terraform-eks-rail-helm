@@ -1,6 +1,6 @@
 # Deploy Redmine/MariaDB EKS cluster using Terraform and Helm
 ## Introduction
-This demonstration uses Terraform, EKS, Helm and you need to setup below tools and binaries in your running server.
+This demonstration uses Terraform, EKS, Helm and you need to setup below tools and binaries in your running server. Terraform scripts are self documented and used instance type is t2.micro. Therefore, it will take some time to get EKS nodes and containers ready.
 ## Pre-requisites
 Initially you have to setup your local server(deployment box). This can be your desktop or and EC2.
 
@@ -39,7 +39,7 @@ Here, I have used local tfstate as the backend due to demonstration.
    ```
    chmod +x join-nodes.sh;./join-nodes.sh
    ```
-7. Now you get the nodes and from kubectl.
+7. Now you get the nodes and from kubectl. Wait few minutes since it takes some time to get ready due to the lower instance type.
    ```
    kubectl get nodes
    [ec2-user@ip-172-31-82-243 terraform-eks-rail-helm]$ kubectl get nodes
@@ -60,7 +60,13 @@ Here, I have used local tfstate as the backend due to demonstration.
    kubectl create -f tiller-clusterrolebinding.yaml
    helm init --service-account tiller --upgrade
    ```
-10. It's time to install Redmine using Helm.
+   OR
+   You can execute 
+   ```
+   chmod +x get-helm-ready.sh;./get-helm-ready.sh
+   ````
+   
+10. It's time to install Redmine using Helm. This will take some time and need to wait few minues since our EKS nodes are t2.micro.
     ```
     helm install --name redmine stable/redmine
     ```
@@ -88,3 +94,4 @@ Here, I have used local tfstate as the backend due to demonstration.
     ```
     terraform destroy --auto-approve
     ```
+## Notes:
