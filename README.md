@@ -2,10 +2,10 @@
 ## Introduction
 This demonstration uses Terraform, EKS, Helm and you need to setup below tools and binaries in your running server. Terraform scripts are self documented and used instance type is t2.micro. Therefore, it will take some time to get EKS nodes and containers ready.
 ## Pre-requisites
-Initially you have to setup your local server(deployment box). This can be your desktop or and EC2.
+Initially you have to setup your local server(deployment box). This can be your desktop or EC2.
 
-* AWS account with privileges. 
-* AWS cli should be installed.(Refer https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+* AWS IAM user with least privilege with generated AWS Access Key ID and AWS Secret Access Key. 
+* AWS CLI should be installed.(Refer https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 * Helm and Tiller should be installed. (https://docs.helm.sh/using_helm/#installing-helm)
 * Install IAM Authenticator. (https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html)
 * Install kubectl.(https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) (probably you have to set repo_gpgcheck=1)
@@ -14,7 +14,7 @@ Initially you have to setup your local server(deployment box). This can be your 
 ## Procedure
 Here, I have used local tfstate as the backend due to demonstration.
 
-1. Configure aws cli with your AWS Access Key ID and AWS Secret Access Key. This is to avoid store your credentials in Terraform files.
+1. Configure AWS CLI with your AWS Access Key ID and AWS Secret Access Key. This is to avoid store your credentials in Terraform files.
    ```
    aws configure     
    ```
@@ -39,7 +39,7 @@ Here, I have used local tfstate as the backend due to demonstration.
    ```
    chmod +x join-nodes.sh;./join-nodes.sh
    ```
-7. Now you get the nodes and from kubectl. Wait few minutes since it takes some time to get ready due to the lower instance type.
+7. Now you get the node's status and from kubectl. Wait few minutes, since it takes some time to get ready due to the lower instance type.
    ```
    kubectl get nodes
    [ec2-user@ip-172-31-82-243 terraform-eks-rail-helm]$ kubectl get nodes
@@ -70,7 +70,7 @@ Here, I have used local tfstate as the backend due to demonstration.
     ```
     helm install --name redmine stable/redmine
     ```
-11. Verify the deployment.
+11. Verify the deployment. Ready status will show in ~ 5 mins.
     ```
     [ec2-user@ip-172-31-82-243 terraform-eks-rail-helm]$ helm ls
     NAME    REVISION        UPDATED                         STATUS          CHART           APP VERSION     NAMESPACE
@@ -99,4 +99,4 @@ Here, I have used local tfstate as the backend due to demonstration.
     ```
     terraform destroy --auto-approve
     ```
-## Notes:
+
