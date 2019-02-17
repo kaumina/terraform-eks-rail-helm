@@ -1,3 +1,7 @@
+#######################################################################################
+#             This tf will create security groups for EKS master and nodes
+########################################################################################
+
 # Create the security group for EKS masters
 
 resource "aws_security_group" "eks-rails-cluster" {
@@ -17,20 +21,7 @@ resource "aws_security_group" "eks-rails-cluster" {
   }
 }
 
-# OPTIONAL: Allow inbound traffic from your local workstation external IP
-#           to the Kubernetes. You will need to replace A.B.C.D below with
-#           your real IP. Services like icanhazip.com can help you find this.
-resource "aws_security_group_rule" "eks-rail-cluster-ingress-workstation-https" {
-  cidr_blocks       = ["123.231.105.78/32"]
-  description       = "Allow workstation to communicate with the cluster API Server"
-  from_port         = 443
-  protocol          = "tcp"
-  security_group_id = "${aws_security_group.eks-rails-cluster.id}"
-  to_port           = 443
-  type              = "ingress"
-}
-
-# Setting up security groups for EKS nodes
+# Set up security groups for EKS nodes
 resource "aws_security_group" "eks-rails-node-sg" {
   name        = "eks-rails-node-sg"
   description = "Security group for all nodes in the cluster"
@@ -51,6 +42,7 @@ resource "aws_security_group" "eks-rails-node-sg" {
   }"
 }
 
+# Setup SG rules
 resource "aws_security_group_rule" "eks-rails-node-ingress-self" {
   description              = "Allow node to communicate with each other"
   from_port                = 0
