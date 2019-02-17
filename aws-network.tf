@@ -50,6 +50,10 @@ resource "aws_route_table" "eks-rail-route-table" {
     cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.eks-rail-gw.id}"
   }
+  
+  tags = {
+    Name = "eks-rail-route"
+  }
 }
 
 resource "aws_route_table_association" "eks-rail-route" {
