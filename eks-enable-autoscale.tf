@@ -45,7 +45,7 @@ resource "aws_launch_configuration" "eks-rails-launchconfig" {
 resource "aws_autoscaling_group" "eks-rails-nodes-autoscaling-group" {
   desired_capacity     = 3
   launch_configuration = "${aws_launch_configuration.eks-rails-launchconfig.id}"
-  max_size             = 3
+  max_size             = 5
   min_size             = 1
   name                 = "terraform-eks-rail"
   vpc_zone_identifier  = ["${aws_subnet.eks-rail-subnet.*.id}"]
