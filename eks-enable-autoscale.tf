@@ -1,3 +1,8 @@
+#######################################################################################
+#             This tf will enable autoscaling to nodes
+########################################################################################
+
+
 # Pull the EKS ami for nodes provided by Amazon
 data "aws_ami" "eks-worker" {
   filter {
