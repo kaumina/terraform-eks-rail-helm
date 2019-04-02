@@ -12,7 +12,7 @@ Initially you have to setup your local server(deployment box). This can be your 
 * Install Terraform.(https://learn.hashicorp.com/terraform/getting-started/install.html)
 
 ## Procedure
-Here, I have used local tfstate as the backend due to being this a demonstration.
+Here, I have used local tfstate as the backend due to being a demonstration.
 
 1. Configure AWS CLI with your AWS Access Key ID and AWS Secret Access Key. This is to avoid store your credentials in Terraform files.
    ```
