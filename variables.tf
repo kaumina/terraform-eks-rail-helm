@@ -1,4 +1,4 @@
-variable "cluster-name" {
+variable "cluster_name" {
   default = "terraform-eks-rail"
-  type    = "string"
+  type    = string
 }

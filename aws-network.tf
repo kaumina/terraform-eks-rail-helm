@@ -10,12 +10,11 @@ provider "aws" {
 resource "aws_vpc" "eks-rail-vpc" {
   cidr_block = "10.0.0.0/16"
 
-  tags = "${
-    map(
-     "Name", "eks-rail-vpc",
-     "kubernetes.io/cluster/${var.cluster-name}", "shared",
-    )
-  }"
+  tags = {
+     Name = "eks-rail-vpc"
+     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    }
+  
 }
 
 # Create subnet
@@ -26,12 +25,10 @@ resource "aws_subnet" "eks-rail-subnet" {
   cidr_block        = "10.0.${count.index}.0/24"
   vpc_id            = "${aws_vpc.eks-rail-vpc.id}"
 
-  tags = "${
-    map(
-     "Name", "eks-rail-node-subnet",
-     "kubernetes.io/cluster/${var.cluster-name}", "shared",
-    )
-  }"
+  tags = {
+     Name = "eks-rail-vpc"
+     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    }
 }
 
 # Create Internet gateway
