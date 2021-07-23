@@ -22,7 +22,7 @@ locals {
   eks-node-userdata = <<USERDATA
 #!/bin/bash
 set -o xtrace
-/etc/eks/bootstrap.sh --apiserver-endpoint '${aws_eks_cluster.eks-rail.endpoint}' --b64-cluster-ca '${aws_eks_cluster.eks-rail.certificate_authority.0.data}' '${var.cluster-name}'
+/etc/eks/bootstrap.sh --apiserver-endpoint '${aws_eks_cluster.eks-rail.endpoint}' --b64-cluster-ca '${aws_eks_cluster.eks-rail.certificate_authority.0.data}' '${var.cluster_name}'
 USERDATA
 }
 
@@ -48,7 +48,7 @@ resource "aws_autoscaling_group" "eks-rails-nodes-autoscaling-group" {
   max_size             = 5
   min_size             = 1
   name                 = "terraform-eks-rail"
-  vpc_zone_identifier  = ["${aws_subnet.eks-rail-subnet.*.id}"]
+  vpc_zone_identifier  = "${aws_subnet.eks-rail-subnet.*.id}"
 
   tag {
     key                 = "Name"
@@ -57,7 +57,7 @@ resource "aws_autoscaling_group" "eks-rails-nodes-autoscaling-group" {
   }
 
   tag {
-    key                 = "kubernetes.io/cluster/${var.cluster-name}"
+    key                 = "kubernetes.io/cluster/${var.cluster_name}"
     value               = "owned"
     propagate_at_launch = true
   }

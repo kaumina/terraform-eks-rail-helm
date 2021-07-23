@@ -34,12 +34,10 @@ resource "aws_security_group" "eks-rails-node-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = "${
-    map(
-     "Name", "eks-rail-node",
-     "kubernetes.io/cluster/${var.cluster-name}", "owned",
-    )
-  }"
+  tags = {
+     Name = "eks-rail-node"
+     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+    }
 }
 
 # Setup SG rules
